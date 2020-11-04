@@ -1,5 +1,3 @@
-source ~/.config/nvim/init.vim
-
 set relativenumber
 set number
 set ignorecase
@@ -26,12 +24,6 @@ set ideajoin
 " https://youtrack.jetbrains.com/issue/VIM-1521
 set commentary
 
-" dia daa cia caa
-set argtextobj
-
-" die dae cie cae
-set textobj-entire
-
 " https://github.com/JetBrains/ideavim/wiki/Select-mode
 " set selectmode-=template
 
@@ -40,46 +32,39 @@ set textobj-entire
 " https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
 " https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf
 set surround
-let mapleader = " "
+let mapleader =" "
 
-" nnoremap <leader>f <Action>(ReformatCode)
-" nnoremap <leader>d <Action>(Debug)
-:map <leader>d :action Debug<CR>
-:map <leader>w :action SaveAll<CR>
-:map <leader>f :action ReformatCode<CR>
-:map <leader>b :action ToggleLineBreakpoint<CR>
-:map <leader>r :action RecentChangedFiles<CR>
+inoremap jj <esc>
+inoremap kj <esc>
+inorempa jk <esc>
+
+nmap zz :action SaveAll<cr>
+nmap ,b :action ToggleLineBreakpoint<cr>
+nmap ,E :action RecentChangedFiles<cr>
 
 " Navigation
-nmap <leader>h :action Back<cr>
-nmap <leader>l :action Forward<cr>
-nmap <leader>L :action RecentLocations<cr>
-nmap <leader>g :action GotoDeclaration<cr>
-nmap <leader>u :action FindUsages<cr>
-nmap <leader>ff :action GotoFile<cr>
-nmap <leader>c :action GotoClass<cr>
-nmap <leader>s :action GotoSymbol<cr>
-" nmap <leader>m :action FileStructurePopup<cr>
-nmap <leader>; :action FileStructurePopup<cr>
-nmap <leader>M :action ActivateStructureToolWindow<cr>
-nmap <leader>d :action ShowErrorDescription<cr>
-nmap <leader>i :action GotoImplementation<cr>
-nmap <leader>I :action SelectIn<cr>
-nmap <leader>e :action RecentFiles<cr>
-nmap <leader>t :action GotoTest<cr>
-nmap <leader>p :action JumpToLastWindow<cr>
-nmap <leader>b :action ShowBookmarks<cr>
+nnoremap ,e :action SearchEverywhere<CR>
+nnoremap ,g :action FindInPath<CR>
+nnoremap ,s :action FileStructurePopup<CR>
 
-" These create newlines like o and O but stay in normal mode
-nmap zj o<Esc>k
-nmap zk O<Esc>j
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gb :action JumpToLastChange<CR>
 
-" key bindings for quickly moving between windows
-" h left, l right, k up, j down
-" nmap <leader>h <c-w>h
-" nmap <leader>l <c-w>l
-" nmap <leader>k <c-w>k
-" nmap <leader>j <c-w>j
+nnoremap U :action FindUsages<CR>
+nnoremap R :action RenameElement<CR>
+
+nnoremap == :action ReformatCode<CR>
+vnoremap == :action ReformatCode<CR>
+
+nnoremap cc :action CommentByLineComment<CR>
+vnoremap cc :action CommentByLineComment<CR>
+
+nnoremap <C-CR> :action ShowIntentionActions<CR>
+
+nnoremap ,a :action GotoAction<CR>
+vnoremap ,a :action GotoAction<CR>
 
 " Use Q for formatting the current paragraph (or visual selection)
 vmap Q gq
@@ -108,23 +93,6 @@ nmap <leader>yd :action Compare.LastVersion<cr>
 " Terminal
 nmap <leader>T :action ActivateTerminalToolWindow<cr>
 
-" unimpaired mappings - from https://github.com/saaguero/ideavimrc/blob/master/.ideavimrc
-nnoremap [<space> O<esc>j
-nnoremap ]<space> o<esc>k
-nnoremap [q :action PreviousOccurence<cr>
-nnoremap ]q :action NextOccurence<cr>
-nnoremap [m :action MethodUp<cr>
-nnoremap ]m :action MethodDown<cr>
-nnoremap [c :action VcsShowPrevChangeMarker<cr>
-nnoremap ]c :action VcsShowNextChangeMarker<cr>
-" Tabs
-nnoremap [b :action PreviousTab<cr>
-nnoremap ]b :action NextTab<cr>
-
-" Search
-nmap <leader>/ :action Find<cr>
-nmap <leader>\ :action FindInPath<cr>
-
 " Moving lines
 nmap [e :action MoveLineUp<cr>
 nmap ]e :action MoveLineDown<cr>
@@ -133,29 +101,22 @@ nmap [s :action MoveStatementUp<cr>
 nmap ]s :action MoveStatementDown<cr>
 
 " Building, Running and Debugging
-nmap ,c :action CompileDirty<cr>
 nmap ,r :action Run<cr>
 nmap ,R :action RunAnything<cr>
 nmap ,b :action Debug<cr>
-nmap ,c :action RunClass<cr>
-nmap ,d :action DebugClass<cr>
 nmap ,t :action RerunTests<cr>
 nmap ,T :action RerunFailedTests<cr>
 
 " To navigate between split panes
-nmap <leader>wo :action NextSplitter<cr>
-nmap <leader>wp :action PrevSplitter<cr>
-nmap <leader>j :action PrevSplitter<cr>
+nmap <C-A>l :action NextSplitter<cr>
+nmap <C-A>j :action NextSplitter<cr>
+nmap <C-A>h :action PrevSplitter<cr>
+nmap <C-A>k :action PrevSplitter<cr>
 
 " Splits manipulation
-nmap <leader>ws :action SplitHorizontally<cr>
-nmap <leader>wv :action SplitVertically<cr>
-nmap <leader>wc :action Unsplit<cr>
-nmap <leader>wC :action UnsplitAll<cr>
-nmap <leader>wd :action OpenEditorInOppositeTabGroup<cr>
-nmap <leader><leader> :action VimFilePrevious<cr>
-" nmap <leader>ww :action JumpToLastWindow<cr>
+nmap <C-a>- :action SplitHorizontally<cr>
+nmap <C-a>_ :action SplitVertically<cr>
+nmap <C-a>= :action Unsplit<cr>
+nmap <C-a>+ :action UnsplitAll<cr>
+nmap <C-a>wd :action OpenEditorInOppositeTabGroup<cr>
 
-" Closing tabs
-nmap <leader>q :action CloseContent<cr>
-nmap <leader>Q :action ReopenClosedTab<cr>
